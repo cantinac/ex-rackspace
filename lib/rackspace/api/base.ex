@@ -24,14 +24,15 @@ defmodule Rackspace.Api.Base do
 
       defp request_get(url, params \\ [], headers \\ [], opts \\ []) do
         auth = get_auth
-        base_headers = [headers: [
+        base_headers = [
           "X-Auth-Token": auth[:token],
           "Content-Type": "application/json"
-        ]]
+        ]
+        all_headers = base_headers |> Enum.concat(headers)
 
         url
           |> query_params(params)
-          |> HTTPotion.get(Enum.concat(base_headers, headers))
+          |> HTTPotion.get([headers: all_headers])
       end
 
       defp request_put(url, body \\ <<>>, params \\ [], opts \\ []) do
