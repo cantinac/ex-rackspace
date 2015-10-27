@@ -40,8 +40,9 @@ defmodule Rackspace.Api.CloudFiles.Object do
   def get(container, object, opts \\ []) do
     get_auth
     region = opts[:region] || Application.get_env(:rackspace, :default_region)
+    headers = opts[:headers] || []
     url = "#{CloudFiles.base_url(region)}/#{container}/#{object}?format=json"
-    resp = request_get(url, [], opts)
+    resp = request_get(url, [], headers, opts)
     case validate_resp(resp) do
       {:ok, _} ->
         Logger.debug "Response Headers: #{inspect resp.headers}"
