@@ -22,15 +22,16 @@ defmodule Rackspace.Api.Base do
         end
       end
 
-      defp request_get(url, params \\ [], opts \\ []) do
+      defp request_get(url, params \\ [], headers \\ [], opts \\ []) do
         auth = get_auth
+        base_headers = [headers: [
+          "X-Auth-Token": auth[:token],
+          "Content-Type": "application/json"
+        ]]
 
         url
           |> query_params(params)
-          |> HTTPotion.get([headers: [
-            "X-Auth-Token": auth[:token],
-            "Content-Type": "application/json"
-          ]])
+          |> HTTPotion.get(Map.merge(base_headers, headers))
       end
 
       defp request_put(url, body \\ <<>>, params \\ [], opts \\ []) do
