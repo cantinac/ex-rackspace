@@ -31,7 +31,7 @@ defmodule Rackspace.Api.Base do
 
         url
           |> query_params(params)
-          |> HTTPotion.get(Map.merge(base_headers, headers))
+          |> HTTPotion.get(Enum.concat(base_headers, headers))
       end
 
       defp request_put(url, body \\ <<>>, params \\ [], opts \\ []) do
