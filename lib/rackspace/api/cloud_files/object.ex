@@ -60,6 +60,7 @@ defmodule Rackspace.Api.CloudFiles.Object do
           hash: resp.headers[:Etag],
           content_type: resp.headers[:"Content-Type"],
           content_encoding: resp.headers[:"Content-Encoding"],
+          content_range: resp.headers[:"Content-Range"],
           bytes: bytes,
           last_modified: resp.headers[:"Last-Modified"],
           metadata: metadata
