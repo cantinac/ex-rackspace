@@ -4,6 +4,7 @@ defmodule Rackspace.Api.CloudFiles.Object do
     bytes: 0,
     content_type: nil,
     content_encoding: nil,
+    content_range: nil,
     hash: nil,
     last_modified: nil,
     name: nil,
